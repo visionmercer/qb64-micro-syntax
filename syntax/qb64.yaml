@@ -1,0 +1,66 @@
+filetype: qb64
+
+detect:
+    filename: "(?i)(\\.bas$|\\.bi$|\\.bm$|\\.frm$)"
+
+rules:
+    - identifier: "\\b[A-Z_][0-9A-Z_]+\\b"
+        
+    - constant.number: "\\b[0-9](_?[0-9])*(\\.([0-9](_?[0-9])*)?)?(e[0-9](_?[0-9])*)?\\b" # decimal
+    - constant.number: "\\b*&(B|b)(_?[01])+\\b"        # bin
+    - constant.number: "\\b*&(O|o)(_?[0-7])+\\b"       # oct
+    - constant.number: "\\b*&(H|h)(_?[0-9a-fA-F])+\\b" # hex
+        
+    - symbol.operator: "[\\-+/*=<>]"
+    - symbol.operator: "\\b(i?)(mod|and|not|or|xor)\\b"
+    - symbol.brackets: "([()])"
+
+    # Types
+    - type: "\\b(?i)(dim( shared)*|redim|type|end type)\\b"
+    - type: "\\b(?i)(as *)*(single|double|integer|long|string)\\b"
+    - type: "\\b(?i)(as *)*_*(bit|byte|integer64|float|unsigned|offset|mem|preserve)\\b"
+    
+
+    # Original QuickBasic keywords
+    - statement: "\\b(?i)(ABS|CALL ABSOLUTE|ACCESS|ALIAS|AND|APPEND|AS|ASC|ATN|BEEP|BINARY|BLOAD|BSAVE|BYVAL|CALL|CASE|CASE ELSE|CASE IS|CDBL|CHAIN|CHDIR|CINT|CIRCLE|CLEAR|CLNG|CLOSE|CLS|COLOR|COMMON|CONST|COS|CSNG|CSRLIN|CVD|CVDMBF|CVI|CVL|CVS|CVSMBF|DATA|DATE|SUB|DECLARE LIBRARY|DECLARE DYNAMIC LIBRARY|DEF SEG|DEFDBL|DEFINT|DEFLNG|DEFSNG|DEFSTR|DIM|DOUBLE|DRAW|ELSE|ELSEIF|END|ENVIRON|EOF|EQV|ERASE|ERDEV|ERL|ERR|ERROR|EVERYCASE|EXIT|EXP|FIELD|FILEATTR|FILES|FIX|FOR|FRE|FREE|FREEFILE|FUNCTION|GET|GOSUB|GOTO|IMP|INP|INPUT|INSTR|INT|INTEGER|INTERRUPT|INTERRUPTX|IOCTL|KEY|KEY LIST|KILL|LBOUND|LEN|LET|LINE|LINE INPUT|KEY LIST|LOC|LOCATE|LOCK|LOF|LOG|LONG|LPOS|LPRINT|LPRINT USING|LSET|MID|MKDIR|MOD|NAME|NEXT|NOT|OFF|ON COM|ON ERROR|ON KEY|ON PEN|ON PLAY|ON STRIG|ON TIMER|ON UEVENT|OPEN|OPEN COM|OPTION BASE|OR|OUT|OUTPUT|PAINT|PALETTE|PALETTE USING|PCOPY|PEEK|PEN|PLAY|PMAP|POINT|POKE|POS|PRESET|PRINT|PRINT USING|PSET|PUT|RANDOM|RANDOMIZE|READ|REDIM|REM|RESET|RESTORE|RESUME|RETURN|RMDIR|RND|RSET|RUN|SADD|SCREEN|SEEK|SELECT CASE|SETMEM|SGN|SHARED|SHELL|SIGNAL|SIN|SINGLE|SLEEP|SOUND|SPC|SQR|STATIC|STEP|STICK|STOP|STRIG|STRING|SUB|SWAP|SYSTEM|TAB|TAN|THEN|TIMER|TYPE|UBOUND|UEVENT|UNLOCK|UNTIL|VAL|VARPTR|VARSEG|VIEW|VIEW PRINT|WAIT|WEND|WHILE|WIDTH|WINDOW|WRITE|XOR|DECLARE LIBRARY|DECLARE DYNAMIC LIBRARY)\\b"
+
+    # QB64 keywords
+    - statement: "\\b_*(?i)(ACCEPTFILEDROP|ACOS|ACOSH|ALLOWFULLSCREEN|ALPHA|ALPHA32|ASIN|ASINH|ASSERT|ATAN2|ATANH|AUTODISPLAY|AXIS|AXIS|BACKGROUNDCOLOR|BIT|BLEND|BLINK|BLUE|BLUE32|BUTTON|BUTTONCHANGE|BYTE||CAPSLOCK|CEIL|CINP|CLEARCOLOR|CLIP|CLIPBOARD|CLIPBOARDIMAGE|COMMANDCOUNT|CONNECTED|CONSOLE|CONSOLEINPUT|CONSOLETITLE|CONTINUE|CONTROLCHR|COPYIMAGE|COPYPALETTE|CV|D2G|D2R|DEFAULTCOLOR|DEFINE|DELAY|DEPTHBUFFER|DESKTOPHEIGHT|DESKTOPWIDTH|DEST|DEVICEINPUT|DEVICES|DIREXISTS|DISPLAY|DISPLAYORDER|DONTBLEND|DONTWAIT|DROPPEDFILE|DROPPEDFILE|ECHO|ERRORLINE|EXIT|FILEEXISTS|FINISHDROP|FLOAT|FONT|FONTHEIGHT|FONTWIDTH|FREEFONT|FREEIMAGE|FREETIMER|FULLSCREEN|G2D|G2R|GLRENDER|GREEN|GREEN32|HEIGHT|HIDE|HYPOT|ICON|INCLERRORLINE|INSTRREV|KEYCLEAR|KEYHIT|KEYDOWN|LASTAXIS|LASTBUTTON|LASTWHEEL|LIMIT|LOADFONT|LOADIMAGE|MAPTRIANGLE|MAPUNICODE|MEM|MEMCOPY|MEMELEMENT|MEMEXISTS|MEMFILL|MEMFREE|MEMIMAGE|MEMNEW|MEMPUT|SCREENMOVE|MOUSEBUTTON|MOUSEHIDE|MOUSEINPUT|MOUSEMOVE|MOUSEMOVEMENTX|MOUSEMOVEMENTY|MOUSEPIPEOPEN|MOUSESHOW|MOUSEWHEEL|MOUSEX|MOUSEY|NEWIMAGE|NUMLOCK|OFFSET|OPENCLIENT|OPENCONNECTION|OPENHOST|PALETTECOLOR|PI|PIXELSIZE|PRESERVE|PRINTIMAGE|PRINTMODE|PRINTSTRING|PRINTWIDTH|PUTIMAGE|PUTIMAGE|R2D|R2G|RED|RED32|READBIT|RESETBIT|RESIZE|RESIZEHEIGHT|RESIZEWIDTH|RGB|RGB32|RGBA|RGBA32|ROUND|SCREENCLICK|SCREENEXISTS|SCREENHIDE|SCREENICON|SCREENIMAGE|SCREENMOVE|SCREENPRINT|SCREENSHOW|SCREENX|SCREENY|SCROLLLOCK|SETALPHA|SETBIT|SHELLHIDE|SHL|SHR|SNDBAL|SNDCLOSE|SNDCOPY|SNDGETPOS|SNDLEN|SNDLIMIT|SNDLOOP|SNDOPEN|SNDOPENRAW|SNDPAUSE|SNDPAUSED|SNDPLAY|SNDPLAYCOPY|SNDPLAYFILE|SNDPLAYING|SNDRATE|SNDRAW|SNDRAWDONE|SNDRAWLEN|SNDSETPOS|SNDSTOP|SNDVOL|SOURCE|STRCMP|STRICMP|TITLE|TOGGLEBIT|TOTALDROPPEDFILES|UNSIGNED|WHEEL|WIDTH|WINDOWHANDLE|WINDOWHASFOCUS)\\b"
+    - statement: "\\b_*(?i)(glArrayElement|glArrayElement|glArrayElement|glBlendFunc|glBlendFunc|glBlendFunc|glCullFace|glCullFace|glCullFace|glDrawPixels|glDrawPixels|glDrawPixels|glEvalPoint2|glEvalPoint2|glEvalPoint2|glFrustum|glFrustum|glFrustum|glGetTexParameteriv|glGetTexParameteriv|glGetTexParameteriv|glHint|glHint|glHint|glIsTexture|glIsTexture|glIsTexture|glLogicOp|glLogicOp|glLogicOp|glMultMatrixf|glMultMatrixf|glMultMatrixf|glNormalPointer|glNormalPointer|glNormalPointer|glOrtho|glOrtho|glOrtho|glPushName|glPushName|glPushName|glRotatef|glRotatef|glRotatef|glStencilOp|glStencilOp|glStencilOp|glTranslatef|glTranslatef|glTranslatef|glViewport|glViewport|glViewport|glViewport|glViewport|glViewport|glViewport|glViewport|glViewport)\\b"
+
+    # Original QuickBasic string keywords
+    - statement: "\\b(?i)((CHR|COMMAND|DATE|ENVIRON|ERDEV|HEX|HEX|HEX|HEX|INKEY|INPUT|IOCTL|IOCTL|IOCTL|IOCTL|LCASE|LEFT|LTRIM|LTRIM|LTRIM|LTRIM|MID|MKD|MKDMBF|MKI|MKL|MKS|MKSMBF|OCT|RIGHT|RTRIM|SPACE|STR|STRING|TIME|UCASE|VARPTR)\\$)"
+
+    # QB64 string keywords
+    - statement: "\\b_*(?i)((CLIPBOARD|CONNECTIONADDRESS|CWD|CWD|CWD|CWD|DEFLATE|DEVICE|DIR|ERRORMESSAGE|INCLERRORFILE|INFLATE|MK|OS|OS|OS|OS|STARTDIR|TITLE|TRIM|TRIM|TRIM|TRIM)\\$)"
+
+    # Control kewords:
+    - statement: "\\b(?i)(for|to|next|if|then|while|wend|do|loop|else|case|select|end|sub|function)\\b"
+    - special: "\\b(?i)(goto|gosub|_continue|continue|exit|return|system)\\b"
+
+    # Unsupported Qbasic keywords
+    - error: "\\b(?i)(calls|cdecl|def fn[A-Za-z0-9]+|exit def|end def|erdev|fileattr|fre|ioctl|on pen|on play|on uevent|setmem|signal|tron|troff)\\b"
+
+    # Unsupported GW Basic keywords
+    - error: "\\b(?i)(auto|cont|def usr|delete|edit|list|llist|load|merge|motor|new|renum|save|usr)\\b"
+    
+     # Metacommands
+    - preproc: "\\b(?i)(Option _Explicit|option explicit|option _explicitarray|option explicitarray)\\b"
+    - preproc: "\\$(?i)(if|else|elseif|end if|let|console|resize|noprefix|checking|color|debug|error|exeicon|screenhide|screenshow|versioninfo)"
+
+    # Strings
+    - constant.string: # "\".+\""
+         start: "\""
+         end: "\""
+         rules: []
+
+    # Comments
+    - comment:
+        start: "\'"
+        end: "$"
+        rules:
+            - todo: "(TODO|XXX|FIXME):?"
+            - preproc: "\\$(?i)(static|dynamic|include)"
+            
+ # Metacommands in comments
+    - preproc: "((?i)rem.|\'\\s*?)\\$(?i)(static|dynamic|include)"
